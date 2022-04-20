@@ -44,15 +44,19 @@ class FindLaneLines:
         out_clip.write_videofile(output_path, audio=False)
 
 def main():
-    args = docopt(__doc__)
-    input = args['INPUT_PATH']
-    output = args['OUTPUT_PATH']
-
     findLaneLines = FindLaneLines()
-    if args['--video']:
-        findLaneLines.process_video(input, output)
-    else:
-        findLaneLines.process_image(input, output)
+    input_var = str(sys.argv[1])
+    input_path = str(sys.argv[2])
+    output_path = str(sys.argv[3])
+    mode1 = str(sys.argv[4])
+    if(input_var == '1'):
+        mode.append(mode1)
+        findLaneLines.process_video(input_path, output_path)
+        
+    elif(input_var == '0'):
+        mode.append(mode1)
+        findLaneLines.process_image(input_path, output_path)
+
 
 
 if __name__ == "__main__":
