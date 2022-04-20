@@ -58,9 +58,11 @@ class FindLaneLines:
         
 
     def process_image(self, input_path, output_path):
-        img = mpimg.imread(input_path)
+        img = cv2.imread(input_path)
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
         out_img = self.forward(img)
-        mpimg.imsave(output_path, out_img)
+        out_img = cv2.cvtColor(out_img,cv2.COLOR_BGR2RGB)
+        cv2.imwrite(output_path, out_img)
 
     def process_video(self, input_path, output_path):
         clip = VideoFileClip(input_path)
