@@ -22,16 +22,40 @@ class FindLaneLines:
         self.lanelines = LaneLines()
 
     def forward(self, img):
-        out_img = np.copy(img)
-        img = self.calibration.undistort(img)
-        img = self.transform.forward(img)
-        img = self.thresholding.forward(img)
-        img = self.lanelines.forward(img)
-        img = self.transform.backward(img)
+        if '1' in mode:
+            out_img = np.copy(img)
+            img_concat = np.zeros(img.shape, np.uint8)
+            height= np.int(img.shape[0])
+            width= np.int(img.shape[1])
+            img = self.calibration.undistort(img)
+            img = self.transform.forward(img)
+            smaller_frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) #resize the frame to be able to fit 4 ,width by half and length by half
+            img = self.thresholding.forward(img)
+            img3=cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)
+            smaller_frame2 = cv2.resize(img3, (0, 0), fx=0.25, fy=0.25) #resize the frame to be able to fit 4 ,width by half and length by half
+            img = self.lanelines.forward(img)
+            smaller_frame3 = cv2.resize(img, (0, 0), fx=0.25, fy=0.25) #resize the frame to be able to fit 4 ,width by half and length by half
+            img = self.transform.backward(img)
+            out_img = cv2.addWeighted(out_img, 1, img, 0.6, 0)
+            bigger_frame = cv2.resize(out_img, (0, 0), fx=1, fy=1)   #resize the frame to be able to fit 4 ,width by half and length by half
+            img_concat[:int(1*height),:int(1*width)] = bigger_frame    #main frame
+            img_concat[:int(0.25*height), 20:20+int(0.25*width)] = smaller_frame  #top left
+            img_concat[:int(0.25*height),40+int(0.25*width):40+int(0.5*width)] = smaller_frame2 
+            img_concat[:int(0.25*height),60+int(0.5*width):60+int(0.75*width)] = smaller_frame3
+            img_concat = self.lanelines.plot(img_concat)
+            return img_concat
 
-        out_img = cv2.addWeighted(out_img, 1, img, 0.6, 0)
-        out_img = self.lanelines.plot(out_img)
-        return out_img
+        else:
+            out_img = np.copy(img)
+            img = self.calibration.undistort(img)
+            img = self.transform.forward(img)
+            img = self.thresholding.forward(img)
+            img = self.lanelines.forward(img)
+            img = self.transform.backward(img)
+            out_img = cv2.addWeighted(out_img, 1, img, 0.6, 0)
+            img_concat = self.lanelines.plot(out_img)
+            return img_concat
+        
 
     def process_image(self, input_path, output_path):
         img = mpimg.imread(input_path)
