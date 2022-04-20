@@ -1,5 +1,12 @@
+"""
+Lane Lines Detection pipeline
+
+ 
+"""
+
 import numpy as np
 import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
 import cv2
 from docopt import docopt
 from IPython.display import HTML, Video
@@ -8,7 +15,11 @@ from CameraCalibration import CameraCalibration
 from Thresholding import *
 from PerspectiveTransformation import *
 from LaneLines import *
+import glob
+import sys
 
+
+mode=[]
 class FindLaneLines:
     """ This class is for parameter tunning.
     Attributes:
