@@ -29,10 +29,10 @@ Linux, MacOS: `source activate carnd`
 ### 2. Run the pipeline:
 
 ```bash
-make sure that the path of the main.py is the same as mentioned in the batch file
-open cmd on the project folder 
-type "run.bat <input_var> <input_path> <output_path> <mode>"
-input_var : 0 for image processing / 1 for video processing
-mode : 0 for Normal mode / 1 for Debugging mode
+*make sure that the path of the main.py is the same as mentioned in the batch file
+- open cmd on the project folder 
+- type "run.bat <input_var> <input_path> <output_path> <mode>"
+- input_var : 0 for image processing / 1 for video processing
+- mode : 0 for Normal mode / 1 for Debugging mode
   
 ```
