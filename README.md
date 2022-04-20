@@ -1,5 +1,5 @@
 # Lane-Detection
-The Project
+
 The goals / steps of this project are the following:
 
 Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
@@ -15,19 +15,24 @@ The images for camera calibration are stored in the folder called camera_cal. Th
 You can process video by using challenge_video.mp4 and project_video.mp4 and see the lanes detected.
 
 
-Usage:
-1. Set up the environment
-conda env create -f environment.yml
+## Usage:
+
+### 1. Set up the environment 
+`conda env create -f environment.yml`
 
 To activate the environment:
 
-Window: conda activate carnd
+Window: `conda activate carnd`
 
-Linux, MacOS: source activate carnd
+Linux, MacOS: `source activate carnd`
 
-2. Run the pipeline:
+### 2. Run the pipeline:
+
+```bash
 make sure that the path of the main.py is the same as mentioned in the batch file
 open cmd on the project folder 
 type "run.bat <input_var> <input_path> <output_path> <mode>"
 input_var : 0 for image processing / 1 for video processing
 mode : 0 for Normal mode / 1 for Debugging mode
+  
+```
